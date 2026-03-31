@@ -1,0 +1,30 @@
+# Personal instructions — learning preferences, not project docs
+CLAUDE.local.md
+
+# Secrets — never commit
+.env
+
+# Python bytecode — compiled files generated automatically, not source
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environment directories — local to each machine
+.venv/
+venv/
+env/
+
+# Distribution and packaging artifacts
+*.egg-info/
+dist/
+build/
+
+# pytest cache
+.pytest_cache/
+
+# macOS filesystem metadata
+.DS_Store
+
+# IDE — IntelliJ/PyCharm (already tracked via .idea, but exclude sensitive local files)
+.idea/workspace.xml
+.idea/tasks.xml

@@ -1,0 +1,49 @@
+{
+  "rules": [
+    {
+      "id": "entrance_direction",
+      "name": "Entrance Direction",
+      "description": "The main door should ideally face North, East, or North-East. These directions are considered auspicious and allow positive energy to enter the home.",
+      "weightage": 25,
+      "what_to_look_for": "Identify the main entrance/front door of the apartment and determine its direction relative to the marked north. Look for doors on the perimeter walls of the floor plan.",
+      "ideal": "North, East, or North-East facing entrance",
+      "avoid": "South or South-West facing entrance, which Vastu considers inauspicious"
+    },
+    {
+      "id": "kitchen_placement",
+      "name": "Kitchen Placement",
+      "description": "The kitchen should be located in the South-East corner of the home, which is governed by the fire element (Agni). This placement is believed to ensure health and prosperity.",
+      "weightage": 20,
+      "what_to_look_for": "Identify the kitchen on the floor plan. Determine which quadrant or corner of the home it occupies relative to the marked north direction.",
+      "ideal": "South-East corner of the home",
+      "avoid": "North-East or South-West placement of the kitchen"
+    },
+    {
+      "id": "master_bedroom_direction",
+      "name": "Master Bedroom Direction",
+      "description": "The master bedroom should be in the South-West part of the home. This direction is associated with stability, strength, and the earth element, promoting restful sleep.",
+      "weightage": 20,
+      "what_to_look_for": "Identify the master bedroom (usually the largest bedroom) on the floor plan. Determine its position relative to the home's center and the marked north direction.",
+      "ideal": "South-West corner or area of the home",
+      "avoid": "North-East placement of the master bedroom, which Vastu reserves for prayer or meditation"
+    },
+    {
+      "id": "bathroom_placement",
+      "name": "Bathroom Placement",
+      "description": "Bathrooms and toilets should avoid the North-East (Ishan corner) and the center of the home (Brahmasthan), as these are considered sacred energy zones.",
+      "weightage": 15,
+      "what_to_look_for": "Identify all bathrooms and toilets on the floor plan. Check whether any fall in the North-East corner or near the center of the home.",
+      "ideal": "North-West or South-West placement for bathrooms",
+      "avoid": "North-East corner (Ishan) or the central zone of the home"
+    },
+    {
+      "id": "brahmasthan",
+      "name": "Brahmasthan (Center of Home)",
+      "description": "The Brahmasthan is the central zone of the home and should remain open, unobstructed, and free of heavy structures. It is considered the energy nucleus of the entire space.",
+      "weightage": 20,
+      "what_to_look_for": "Identify the approximate center of the floor plan. Check whether it is open (e.g., a living area or open space) or blocked by walls, columns, toilets, or heavy furniture.",
+      "ideal": "Open living area, courtyard, or unobstructed space at the center",
+      "avoid": "Toilets, kitchens, pillars, or load-bearing walls at the center of the home"
+    }
+  ]
+}
