@@ -1,5 +1,3 @@
-from typing import Optional
-
 from pydantic import BaseModel, Field
 
 
@@ -51,7 +49,7 @@ class ErrorResponse(BaseModel):
     """
 
     error: str = Field(description="A safe, user-facing error message with no internal details")
-    detail: Optional[str] = Field(
+    detail: str | None = Field(
         default=None,
         description="Optional additional context — still user-safe, never a stack trace"
     )

@@ -3,6 +3,7 @@ services:
   - type: web
     name: myvastu-api
     runtime: python
+    pythonVersion: "3.11.0"
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
@@ -13,6 +14,7 @@ services:
   - type: web
     name: myvastu-ui
     runtime: python
+    pythonVersion: "3.11.0"
     buildCommand: pip install -r requirements.txt
     startCommand: streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
     envVars:
