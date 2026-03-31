@@ -1,4 +1,5 @@
 import io
+import os
 
 import requests
 import streamlit as st
@@ -11,7 +12,9 @@ st.set_page_config(
     layout="centered",
 )
 
-API_BASE_URL = "http://127.0.0.1:8000/api/v1"
+# In production (Render), set API_BASE_URL to the deployed FastAPI service URL.
+# Falls back to localhost for local development.
+API_BASE_URL = os.environ.get("API_BASE_URL", "http://127.0.0.1:8000/api/v1")
 
 COMPASS_OPTIONS = ["N", "NE", "E", "SE", "S", "SW", "W", "NW"]
 COMPASS_LABELS = {

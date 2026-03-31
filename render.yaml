@@ -1,0 +1,21 @@
+services:
+  # FastAPI backend — the AI analysis engine
+  - type: web
+    name: myvastu-api
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ANTHROPIC_API_KEY
+        sync: false  # Set this manually in the Render dashboard — never commit the real value
+
+  # Streamlit frontend — the user-facing UI
+  - type: web
+    name: myvastu-ui
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run streamlit_app.py --server.port $PORT --server.address 0.0.0.0 --server.headless true
+    envVars:
+      - key: API_BASE_URL
+        sync: false  # Set this to the myvastu-api URL after the backend is deployed
+                     # e.g. https://myvastu-api.onrender.com/api/v1
