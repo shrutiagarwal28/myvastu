@@ -1,7 +1,7 @@
 import logging
 
-import anthropic
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
+from google.api_core import exceptions as google_exceptions
 
 from app.core.config import Settings, get_settings
 from app.core.rules_loader import load_vastu_rules
@@ -74,18 +74,18 @@ async def analyze_floor_plan(
             content_type=floor_plan.content_type,
             north_direction=normalized_direction,
             rules=rules,
-            anthropic_api_key=settings.anthropic_api_key,
-            claude_model=settings.claude_model,
+            gemini_api_key=settings.gemini_api_key,
+            gemini_model=settings.gemini_model,
             max_tokens=settings.max_tokens,
         )
-    except anthropic.AuthenticationError:
-        logger.error("Anthropic API authentication failed — check ANTHROPIC_API_KEY")
+    except google_exceptions.PermissionDenied:
+        logger.error("Gemini API authentication failed — check GEMINI_API_KEY")
         raise HTTPException(status_code=500, detail="Analysis service configuration error. Please contact support.")
-    except anthropic.RateLimitError:
-        logger.warning("Anthropic API rate limit hit")
+    except google_exceptions.ResourceExhausted:
+        logger.warning("Gemini API rate limit hit")
         raise HTTPException(status_code=429, detail="Analysis service is busy. Please try again in a moment.")
-    except anthropic.APIError as e:
-        logger.error(f"Anthropic API error: {e}")
+    except google_exceptions.GoogleAPIError as e:
+        logger.error(f"Gemini API error: {e}")
         raise HTTPException(status_code=502, detail="Analysis service is temporarily unavailable. Please try again.")
     except ValueError as e:
         logger.error(f"Failed to parse analysis response: {e}")

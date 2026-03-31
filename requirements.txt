@@ -2,8 +2,8 @@
 fastapi==0.115.12
 uvicorn==0.34.0
 
-# Anthropic SDK — used directly (raw) in Phase 1; no LangChain yet
-anthropic==0.49.0
+# Google Gemini SDK — free tier supports vision, no credit card required
+google-generativeai==0.8.4
 
 # Pydantic for data validation and typed models
 # pydantic is bundled with FastAPI, but pydantic-settings is a separate package

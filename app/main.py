@@ -44,7 +44,7 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
     # We catch it here to log a clear message before the process exits.
     try:
         settings = get_settings()
-        logger.info(f"Configuration loaded — model: {settings.claude_model}")
+        logger.info(f"Configuration loaded — model: {settings.gemini_model}")
     except Exception as e:
         logger.critical(f"Startup failed — configuration error: {e}")
         logger.critical("Ensure ANTHROPIC_API_KEY is set in your .env file")

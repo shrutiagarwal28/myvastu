@@ -18,13 +18,12 @@ class Settings(BaseSettings):
     """
 
     # Required — Pydantic will raise ValidationError on startup if this is missing or empty
-    anthropic_api_key: str
+    gemini_api_key: str
 
-    # The Claude model to use for vision analysis
-    # Defined here (not hardcoded in the service) so it can be swapped via env var
-    claude_model: str = "claude-opus-4-6"
+    # Gemini 1.5 Flash — free tier, supports vision, fast response times
+    gemini_model: str = "gemini-1.5-flash"
 
-    # Controls how much detail Claude returns in its thinking; higher = more thorough but slower
+    # Controls response length; 2048 is plenty for structured JSON analysis output
     max_tokens: int = 2048
 
     model_config = SettingsConfigDict(
