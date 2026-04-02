@@ -1,0 +1,86 @@
+/* Custom CSS for MyVastu Streamlit App */
+
+/* Overall app styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+}
+
+/* Header styling */
+h1, h2, h3 {
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* Button styling */
+.stButton button {
+    background: linear-gradient(45deg, #3498db, #2980b9);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.stButton button:hover {
+    background: linear-gradient(45deg, #2980b9, #21618c);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* File uploader styling */
+.stFileUploader {
+    border: 2px dashed #3498db;
+    border-radius: 10px;
+    padding: 20px;
+    background: rgba(255,255,255,0.8);
+}
+
+/* Selectbox styling */
+.stSelectbox div[data-baseweb="select"] {
+    border-radius: 8px;
+    border: 1px solid #bdc3c7;
+}
+
+/* Expander styling */
+.stExpander {
+    border: 1px solid #ecf0f1;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.stExpander summary {
+    background: #ecf0f1;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+/* Score bar container */
+.score-bar {
+    margin: 10px 0;
+}
+
+/* Info and success messages */
+.stAlert {
+    border-radius: 8px;
+    border: none;
+}
+
+/* Container for overall score */
+.score-container {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    text-align: center;
+    margin: 20px 0;
+}
+
+/* Hide Streamlit's default footer */
+footer {
+    visibility: hidden;
+}

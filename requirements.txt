@@ -20,6 +20,7 @@ python-multipart==0.0.20
 
 # Frontend
 streamlit==1.44.0
+streamlit-extras==0.7.8  # for enhanced UI components like cards
 Pillow==11.2.1  # image preview in Streamlit UI
 
 # HTTP client used by Streamlit to call the FastAPI backend

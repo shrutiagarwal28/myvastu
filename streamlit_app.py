@@ -4,6 +4,11 @@ import os
 import requests
 import streamlit as st
 from PIL import Image
+from streamlit_card import card
+
+# Load custom CSS
+with open("style.css") as f:
+    st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
 # --- Page config ---
 st.set_page_config(
@@ -148,15 +153,12 @@ if analyze_clicked and uploaded_file is not None:
             score_color = "#e74c3c"
             grade = "Needs Attention"
 
-        st.markdown(
-            f"""
-            <div style="text-align:center;padding:20px;background:#f8f8f8;border-radius:12px;">
-              <div style="font-size:52px;font-weight:bold;color:{score_color};">{overall:.0f}</div>
-              <div style="font-size:16px;color:#666;">out of 100</div>
-              <div style="font-size:18px;font-weight:600;margin-top:6px;color:{score_color};">{grade}</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
+        st.metric(
+            label="Overall Score",
+            value=f"{overall:.0f} / 100",
+            delta=None,
+            help=grade,
+            icon="✅" if overall >= 50 else "❌",
         )
 
     with label_col:
