@@ -1,3 +1,4 @@
+import asyncio
 import io
 import json
 import logging
@@ -153,8 +154,11 @@ async def analyze_floor_plan(
 
     logger.info("Sending request to Gemini API...")
 
-    # Gemini takes a list of content parts — image first, then the text prompt
-    response = model.generate_content(
+    # Gemini's SDK is synchronous — running it directly in an async function would block
+    # the entire FastAPI event loop for the 15-30s the API call takes. asyncio.to_thread()
+    # offloads it to a thread pool, keeping the event loop free for other requests.
+    response = await asyncio.to_thread(
+        model.generate_content,
         [image, prompt_text],
         generation_config=genai.types.GenerationConfig(
             max_output_tokens=max_tokens,
