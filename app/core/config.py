@@ -1,6 +1,7 @@
 import logging
 from functools import lru_cache
 
+import google.generativeai as genai
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 logger = logging.getLogger(__name__)
@@ -49,3 +50,20 @@ def get_settings() -> Settings:
     """
     logger.info("Loading application settings from environment")
     return Settings()
+
+
+@lru_cache
+def get_gemini_model() -> genai.GenerativeModel:
+    """
+    Returns a cached GenerativeModel instance.
+
+    The model object is safe to share across concurrent requests — generate_content()
+    creates a new HTTP request each time without mutating the model object's state.
+    lru_cache ensures we instantiate it once regardless of how many requests call this.
+
+    Requires genai.configure() to have been called at startup (in lifespan) before
+    this is first invoked — the SDK uses the globally configured API key.
+    """
+    settings = get_settings()
+    logger.info(f"Initialising Gemini model: {settings.gemini_model}")
+    return genai.GenerativeModel(model_name=settings.gemini_model)

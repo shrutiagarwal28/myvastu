@@ -1,9 +1,10 @@
 import logging
 
+import google.generativeai as genai
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
 from google.api_core import exceptions as google_exceptions
 
-from app.core.config import Settings, get_settings
+from app.core.config import Settings, get_gemini_model, get_settings
 from app.core.rules_loader import load_vastu_rules
 from app.models.schemas import AnalyzeResponse
 from app.services import vastu_analyzer
@@ -30,6 +31,7 @@ async def analyze_floor_plan(
     floor_plan: UploadFile = File(description="Floor plan image — JPG or PNG, max 5MB"),
     north_direction: str = Form(description="North direction — one of: N, NE, E, SE, S, SW, W, NW"),
     settings: Settings = Depends(get_settings),
+    model: genai.GenerativeModel = Depends(get_gemini_model),
 ) -> AnalyzeResponse:
     """
     POST /analyze — validates inputs, then delegates to the vastu_analyzer service.
@@ -74,8 +76,7 @@ async def analyze_floor_plan(
             content_type=floor_plan.content_type,
             north_direction=normalized_direction,
             rules=rules,
-            gemini_api_key=settings.gemini_api_key,
-            gemini_model=settings.gemini_model,
+            model=model,
             max_tokens=settings.max_tokens,
         )
     except google_exceptions.PermissionDenied:

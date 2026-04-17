@@ -3,6 +3,7 @@ import sys
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
+import google.generativeai as genai
 from fastapi import FastAPI
 
 from app.api.analyze import router as analyze_router
@@ -47,8 +48,14 @@ async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
         logger.info(f"Configuration loaded — model: {settings.gemini_model}")
     except Exception as e:
         logger.critical(f"Startup failed — configuration error: {e}")
-        logger.critical("Ensure ANTHROPIC_API_KEY is set in your .env file")
+        logger.critical("Ensure GEMINI_API_KEY is set in your .env file")
         sys.exit(1)
+
+    # Configure the Gemini SDK once at startup — this sets global SDK state.
+    # Doing it here (single-threaded, before requests are accepted) avoids the
+    # race condition that would occur if multiple request threads called it concurrently.
+    genai.configure(api_key=settings.gemini_api_key)
+    logger.info("Gemini SDK configured")
 
     # Validate that vastu-rules.json exists and is structurally valid.
     # load_vastu_rules() is cached, so this also warms the cache for the first request.

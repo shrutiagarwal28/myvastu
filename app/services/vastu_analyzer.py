@@ -5,7 +5,7 @@ import logging
 import re
 from typing import Any
 
-import google.generativeai as genai
+import google.generativeai as genai  # used for GenerativeModel type hint
 from PIL import Image
 
 from app.models.schemas import AnalyzeResponse, RuleResult
@@ -127,8 +127,7 @@ async def analyze_floor_plan(
     content_type: str,
     north_direction: str,
     rules: list[dict[str, Any]],
-    gemini_api_key: str,
-    gemini_model: str,
+    model: genai.GenerativeModel,
     max_tokens: int,
 ) -> AnalyzeResponse:
     """
@@ -142,11 +141,7 @@ async def analyze_floor_plan(
         google.api_core.exceptions.GoogleAPIError: if the API call fails
         ValueError: if Gemini's response cannot be parsed
     """
-    logger.info(f"Starting Vastu analysis — north: {north_direction}, model: {gemini_model}, rules: {len(rules)}")
-
-    # Configure the Gemini client with the API key
-    genai.configure(api_key=gemini_api_key)
-    model = genai.GenerativeModel(model_name=gemini_model)
+    logger.info(f"Starting Vastu analysis — north: {north_direction}, model: {model.model_name}, rules: {len(rules)}")
 
     # Convert raw bytes to a PIL Image — Gemini's SDK accepts PIL images directly
     image = Image.open(io.BytesIO(image_bytes))
